@@ -3,8 +3,8 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8">
 <title>LoginFrom.jsp : 로그인 구현</title></head>
 <body>
- <h2>로그인 페이지</h2>
-	<%-- <jsp:include page="../Common/Link.jsp" /> --%>
+	<jsp:include page="../Common/Link.jsp" />
+	 <h2>로그인 페이지</h2>
     <span style="color: red; font-size: 1.2em;"> <!-- 글자와 글자크기 지정 -->
         <%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %> 
         <!-- 조건 : request 영역에 "LoginErrMsg" 가 있니? true : false -->
