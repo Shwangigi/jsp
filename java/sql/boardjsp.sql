@@ -6,7 +6,12 @@ create table member(
    primary key(id)
 ) -- 회원용 테이블
 
+drop table member;
+drop table board;
+
 select * from member;
+
+select * from board;
 
 create table board(
   num number primary key, -- 게시물 번호(시퀀스)
@@ -31,22 +36,38 @@ create sequence seq_board_num
    
    select * from member where id='kkw' and pass='1234';
    
-insert into member(id,pass, name) values ( 'kkw','1234', '김기원');
-insert into member(id,pass, name) values ( 'ysh','1234', '양승환');
-insert into member(id,pass, name) values ( 'ysu','1234', '용상엽');
-insert into member(id,pass, name) values ( 'ahj','1234', '안희쥰');
-insert into member(id,pass, name) values ( 'jgj','1234', '조건제');
+      id varchar2(10) not null,
+   pass varchar2(10) not null,
+   name varchar2(30) not null,
+   sex varchar2(5) not null,
+   birthday varchar2(20) not null,
+   email varchar2(30) not null,
+   phone varchar2(20) not null,
+   adress varchar2(50) not null,
+   regidate date default sysdate not null, -- 생성날짜
+   
+insert into member(id,pass, name) 
+values ( 'kkw','1234', '김기원');
+insert into member(id,pass, name) 
+values ( 'kks','1236', '양승환');
+insert into member(id,pass, name) 
+values ( 'kkq','1235', '안희준');
+insert into member(id,pass, name) 
+values ( 'ahj','1235', '조건재');
+insert into member(id,pass, name) 
+values ( 'jgj','1235', '신용재');
 
 insert into board(num, title, content, id, postdate, visitcount)
 values (seq_board_num.nextval, '제목1','내용1', 'kkw',sysdate,0);
 insert into board(num, title, content, id, postdate, visitcount)
-values (seq_board_num.nextval, '제목2','내용2', 'ysh',sysdate,0);
+values (seq_board_num.nextval, '제목2','내용2', 'kks',sysdate,0);
 insert into board(num, title, content, id, postdate, visitcount)
-values (seq_board_num.nextval, '제목3','내용3', 'ysu',sysdate,0);
+values (seq_board_num.nextval, '제목3','내용3', 'kkq',sysdate,0);
 insert into board(num, title, content, id, postdate, visitcount)
 values (seq_board_num.nextval, '제목4','내용4', 'ahj',sysdate,0);
 insert into board(num, title, content, id, postdate, visitcount)
 values (seq_board_num.nextval, '제목5','내용5', 'jgj',sysdate,0);
+
    
 
 select count(*) from board where title like'%제목%'
@@ -54,3 +75,9 @@ select count(*) from board where title like'%제목%'
 select B.*, M.* from member M inner join board B on M.id = B.id where num = 2;
 
 update board set visitcount = visitcount+1 where num=2;
+
+select * from (
+                select Tb.*, rownum rNum from (
+                                            select  * from board order by num desc
+                                                )Tb
+               ) where rNum between 1 and 10;

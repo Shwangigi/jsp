@@ -25,14 +25,17 @@
             alert("패스워드를 입력하세요."); /* 경고창 */
             return false; /* false를 리턴 */
         }
+        
     }
+    
     </script>
     
     <form action="LoginProcess.jsp" method="get" name="loginFrm"
         onsubmit="return validateForm(this);"><!-- onsubmit 검증 먼저 하고 action으로 보냄 -->
         아이디 : <input type="text" name="user_id" /><br />
         패스워드 : <input type="password" name="user_pw" /><br />
-        <input type="submit" value="로그인하기" />
+        <input type="submit" value="로그인" />   
+       <button type="button" onclick= "location.href='../08Board/Register.jsp'">회원가입</button>
     </form>
     
     <%
